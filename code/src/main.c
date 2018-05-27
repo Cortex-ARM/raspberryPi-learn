@@ -15,19 +15,24 @@
 #include "lcd5110.h"
 #include "key.h"
 
-void KeyboardScan()
+
+void Key_Function(KEY_VALUE key_value);
+int get_tp(void);
+int get_ip(char *ip_name, char *ip_buff);
+int uptime(char *str);
+void Display_tp(void);
+void Display_ip(void);
+void Display_time(void);
+
+void Key_Function(KEY_VALUE key_value)
 {
     char temp_str[20];
-
-    KeyScan(&KEY[0], digitalRead(S1));
-    KeyScan(&KEY[1], digitalRead(S2));
-    KeyScan(&KEY[2], digitalRead(S3));
-    KeyScan(&KEY[3], digitalRead(S4));
-    sprintf(temp_str,"S1:%d %d  S2:%d %d", KEY[0].short_press, KEY[0].long_press, KEY[1].short_press, KEY[1].long_press);
-    LCD_write_english_string(0,4,temp_str);
-    sprintf(temp_str,"S3:%d %d  S4:%d %d", KEY[2].short_press, KEY[2].long_press, KEY[3].short_press, KEY[3].long_press);
+    
+    sprintf(temp_str,"Key_Value: %d", key_value);
     LCD_write_english_string(0,5,temp_str);
-    if(KEY[3].long_press) LCD_BL_ON;
+    if(key_value == K2_DOWN_SHORT)  Display_tp();
+    if(key_value == K3_DOWN_SHORT)  Display_ip();
+    if(key_value == K4_DOWN_LONG)   LCD_BL_ON;
     else LCD_BL_OFF;
 }
 
@@ -45,113 +50,71 @@ int get_tp()
     return temp;
 }
 
-char* get_eth0_ip(char* ip_buf)
+void Display_tp()
 {
-    struct ifreq temp;
-    struct sockaddr_in *myaddr;
-    int fd = 0;
-    int ret = -1;
-    strcpy(temp.ifr_name, "eth0");
-    if((fd=socket(AF_INET, SOCK_STREAM, 0))<0)
-    {
-        return NULL;
-    }
-    ret = ioctl(fd, SIOCGIFADDR, &temp);
-    close(fd);
-    if(ret < 0)
-    {
-        return NULL;
-    }
-    myaddr = (struct sockaddr_in *)&(temp.ifr_addr);
-    strcpy(ip_buf, inet_ntoa(myaddr->sin_addr));
-    return ip_buf;
-} 
-char* get_wlan0_ip(char* ip_buf)
-{
-    struct ifreq temp;
-    struct sockaddr_in *myaddr;
-    int fd = 0;
-    int ret = -1;
-    strcpy(temp.ifr_name, "wlan0");
-    if((fd=socket(AF_INET, SOCK_STREAM, 0))<0)
-    {
-        return NULL;
-    }
-    ret = ioctl(fd, SIOCGIFADDR, &temp);
-    close(fd);
-    if(ret < 0)
-    {
-        return NULL;
-    }
-    myaddr = (struct sockaddr_in *)&(temp.ifr_addr);
-    strcpy(ip_buf, inet_ntoa(myaddr->sin_addr));
-    return ip_buf;
-}
-int uptime(char *str)
-{
-	time_t now;
-	struct tm *tmnow;
-	static time_t old;
-	
-	time(&now);
-	if(old != now)
-	{
-		tmnow=localtime(&now);
-		if(tmnow->tm_sec%10 < 2)
-			strftime(str,100,"%F",tmnow);
-		else
-			strftime(str,100,"%X  ",tmnow);
-		old = now;
+    char str_tp[20];
 
-		if(tmnow->tm_sec == 0)
-		    return 2;
-		else
-		    return 1;
-	}
-	else 
-		return 0;
+    sprintf(str_tp, "CPU-TP:%d", get_tp());
+    LCD_write_english_string(0, 3, str_tp);
+}
+
+int get_ip(char *ip_name, char *ip_buff)
+{
+    struct ifreq temp;
+    struct sockaddr_in *myaddr;
+    int fd = 0;
+    int ret = -1;
+
+    strcpy(ip_buff, "No ");
+    strcat(ip_buff, ip_name);
+    strcpy(temp.ifr_name, ip_name);
+    if((fd=socket(AF_INET, SOCK_STREAM, 0))<0)	
+	return -1;
+    ret = ioctl(fd, SIOCGIFADDR, &temp);
+    close(fd);
+    if(ret < 0)	
+	return -1;
+    myaddr = (struct sockaddr_in *)&(temp.ifr_addr);
+    strcpy(ip_buff, inet_ntoa(myaddr->sin_addr));
+    return 0;
+}
+
+void Display_ip()
+{
+    char str_ip[20];
+
+    get_ip("eth0", str_ip);
+    LCD_write_english_string(0, 1, str_ip);
+    get_ip("wlan0", str_ip);
+    LCD_write_english_string(0, 2, str_ip);
+}
+
+void Display_time()
+{
+    char str_time[20];
+    time_t now;
+    struct tm *tmnow;
+	
+    time(&now);
+    tmnow=localtime(&now);
+    if(tmnow->tm_sec%10 < 2)
+	strftime(str_time,100,"%F",tmnow);
+    else
+	strftime(str_time,100,"%X  ",tmnow);
+    LCD_write_english_string(0,0,str_time);
 }
 
 int main(void) 
 {
-    char temp_str[20];
-
     int_clk();
     LCD_init();     
     LCD_clear();
     KeyInit();
     while(1)
     {
-	//function for key
-	KeyboardScan();
-	
-	//update to time
-	switch(uptime(temp_str))
-        {
-	    case 1:
-	    {
-		LCD_write_english_string(0,0,temp_str);
-		break;
-	    }
-	    case 2:
-	    {
-		if(get_eth0_ip(temp_str) != NULL)
-		    LCD_write_english_string(0,1,temp_str);
-		else
-		    LCD_write_english_string(0,1,"No eth0       ");
-		if(get_wlan0_ip(temp_str) != NULL)
-		    LCD_write_english_string(0,2,temp_str);
-		else
-		    LCD_write_english_string(0,2,"No wlan0      ");
-		sprintf(temp_str,"CPU_TP:%d",get_tp());
-		LCD_write_english_string(0,3,temp_str);
-		break;
-	    }
-	    default:break;
-        }
-
-	//delay
-	delay(30);
+	Key_Function(KeyboardScan());
+	Display_time();	
+	delay(50);
     }
     return 0; 
 }
