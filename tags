@@ -4,18 +4,32 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
+ALL_UP	code/inc/key.h	/^    ALL_UP,$/;"	e	enum:__anon1
 CC	Makefile	/^CC = gcc$/;"	m
 CFLAGS	Makefile	/^CFLAGS = -g -Wall -I$(DIR_INC) -lwiringPi$/;"	m
 DIR_BIN	Makefile	/^DIR_BIN = .\/bin$/;"	m
 DIR_INC	Makefile	/^DIR_INC = .\/code\/inc$/;"	m
 DIR_OBJ	Makefile	/^DIR_OBJ = .\/obj$/;"	m
 DIR_SRC	Makefile	/^DIR_SRC = .\/code\/src$/;"	m
-KEY	code/src/key.c	/^key_sta KEY[4];$/;"	v
+Display_ip	code/src/main.c	/^void Display_ip()$/;"	f
+Display_time	code/src/main.c	/^void Display_time()$/;"	f
+Display_tp	code/src/main.c	/^void Display_tp()$/;"	f
+K1_DOWN_LONG	code/inc/key.h	/^    K1_DOWN_LONG,$/;"	e	enum:__anon1
+K1_DOWN_SHORT	code/inc/key.h	/^    K1_DOWN_SHORT,$/;"	e	enum:__anon1
+K2_DOWN_LONG	code/inc/key.h	/^    K2_DOWN_LONG,$/;"	e	enum:__anon1
+K2_DOWN_SHORT	code/inc/key.h	/^    K2_DOWN_SHORT,$/;"	e	enum:__anon1
+K3_DOWN_LONG	code/inc/key.h	/^    K3_DOWN_LONG,$/;"	e	enum:__anon1
+K3_DOWN_SHORT	code/inc/key.h	/^    K3_DOWN_SHORT,$/;"	e	enum:__anon1
+K4_DOWN_LONG	code/inc/key.h	/^    K4_DOWN_LONG$/;"	e	enum:__anon1
+K4_DOWN_SHORT	code/inc/key.h	/^    K4_DOWN_SHORT,$/;"	e	enum:__anon1
+KEY	code/src/key.c	/^KEY_STA KEY[4];$/;"	v
 KEY_H_	code/inc/key.h	2;"	d
-KEY_STA	code/inc/key.h	/^typedef struct KEY_STA$/;"	s
+KEY_STA	code/inc/key.h	/^}KEY_STA;$/;"	t	typeref:struct:__anon2
+KEY_VALUE	code/inc/key.h	/^}KEY_VALUE;$/;"	t	typeref:enum:__anon1
 KeyInit	code/src/key.c	/^void KeyInit()$/;"	f
-KeyScan	code/src/key.c	/^void KeyScan(key_sta *Sn, int value)$/;"	f
-KeyboardScan	code/src/main.c	/^void KeyboardScan()$/;"	f
+KeyScan	code/src/key.c	/^static void KeyScan(KEY_STA *Sn, int value)$/;"	f	file:
+Key_Function	code/src/main.c	/^void Key_Function(KEY_VALUE key_value)$/;"	f
+KeyboardScan	code/src/key.c	/^KEY_VALUE KeyboardScan()$/;"	f
 LCD5110_H_	code/inc/lcd5110.h	2;"	d
 LCD_BL_OFF	code/inc/lcd5110.h	21;"	d
 LCD_BL_OFF	code/inc/lcd5110.h	40;"	d
@@ -41,14 +55,14 @@ LCD_write_byte	code/src/lcd5110.c	/^static void LCD_write_byte(unsigned char dat
 LCD_write_char	code/src/lcd5110.c	/^void LCD_write_char(unsigned char c)$/;"	f
 LCD_write_chinese_string	code/src/lcd5110.c	/^void LCD_write_chinese_string(unsigned char X, unsigned char Y, $/;"	f
 LCD_write_english_string	code/src/lcd5110.c	/^void LCD_write_english_string(unsigned char X,unsigned char Y,char *s)$/;"	f
-LEAD_COUNT	code/src/key.c	7;"	d	file:
-LONG_COUNT	code/src/key.c	5;"	d	file:
+LEAD_COUNT	code/src/key.c	8;"	d	file:
+LONG_COUNT	code/src/key.c	6;"	d	file:
 OBJ	Makefile	/^OBJ = $(patsubst %.c,$(DIR_OBJ)\/%.o,$(notdir $(SRC))) $/;"	m
 RASPBERRY	code/inc/lcd5110.h	5;"	d
-S1	code/inc/key.h	5;"	d
-S2	code/inc/key.h	6;"	d
-S3	code/inc/key.h	7;"	d
-S4	code/inc/key.h	8;"	d
+S1	code/inc/key.h	4;"	d
+S2	code/inc/key.h	5;"	d
+S3	code/inc/key.h	6;"	d
+S4	code/inc/key.h	7;"	d
 SCLK_OFF	code/inc/lcd5110.h	19;"	d
 SCLK_OFF	code/inc/lcd5110.h	38;"	d
 SCLK_ON	code/inc/lcd5110.h	18;"	d
@@ -57,23 +71,20 @@ SDIN_OFF	code/inc/lcd5110.h	17;"	d
 SDIN_OFF	code/inc/lcd5110.h	36;"	d
 SDIN_ON	code/inc/lcd5110.h	16;"	d
 SDIN_ON	code/inc/lcd5110.h	35;"	d
-SHORT_COUNT	code/src/key.c	6;"	d	file:
+SHORT_COUNT	code/src/key.c	7;"	d	file:
 SRC	Makefile	/^SRC = $(wildcard $(DIR_SRC)\/*.c)  $/;"	m
 TARGET	Makefile	/^TARGET = $(DIR_BIN)\/lcd$/;"	m
 delay_ms	code/src/lcd5110.c	/^static void delay_ms(unsigned int n)       \/\/N msÑÓÊ±º¯Êý$/;"	f	file:
 delay_ms	code/src/lcd5110.c	/^static void delay_ms(unsigned int n)$/;"	f	file:
 delay_us	code/src/lcd5110.c	/^static void delay_us(unsigned int n)$/;"	f	file:
 font6x8	code/src/lcd5110.c	/^static const  unsigned char font6x8[][6] =$/;"	v	file:
-get_eth0_ip	code/src/main.c	/^char* get_eth0_ip(char* ip_buf)$/;"	f
+get_ip	code/src/main.c	/^int get_ip(char *ip_name, char *ip_buff)$/;"	f
 get_tp	code/src/main.c	/^int get_tp()$/;"	f
-get_wlan0_ip	code/src/main.c	/^char* get_wlan0_ip(char* ip_buf)$/;"	f
 int_clk	code/src/lcd5110.c	/^void int_clk(void)$/;"	f
-key_sta	code/inc/key.h	/^}key_sta;$/;"	t	typeref:struct:KEY_STA
-lead_count	code/inc/key.h	/^    unsigned char lead_count;$/;"	m	struct:KEY_STA
-long_press	code/inc/key.h	/^    unsigned char long_press;$/;"	m	struct:KEY_STA
+lead_count	code/inc/key.h	/^    unsigned char lead_count;$/;"	m	struct:__anon2
+long_press	code/inc/key.h	/^    unsigned char long_press;$/;"	m	struct:__anon2
 main	code/src/main.c	/^int main(void) $/;"	f
-press_count	code/inc/key.h	/^    unsigned char press_count;$/;"	m	struct:KEY_STA
-short_press	code/inc/key.h	/^    unsigned char short_press;$/;"	m	struct:KEY_STA
-tri	code/inc/key.h	/^    unsigned char tri;$/;"	m	struct:KEY_STA
-uptime	code/src/main.c	/^int uptime(char *str)$/;"	f
+press_count	code/inc/key.h	/^    unsigned char press_count;$/;"	m	struct:__anon2
+short_press	code/inc/key.h	/^    unsigned char short_press;$/;"	m	struct:__anon2
+tri	code/inc/key.h	/^    unsigned char tri;$/;"	m	struct:__anon2
 write_chinese	code/src/lcd5110.c	/^static unsigned char write_chinese[][32]={$/;"	v	file:
