@@ -16,7 +16,7 @@
 #include "key.h"
 
 
-void Key_Function(KEY_VALUE key_value);
+void Key_Function(int key_value);
 int get_tp(void);
 int get_ip(char *ip_name, char *ip_buff);
 int uptime(char *str);
@@ -24,14 +24,17 @@ void Display_tp(void);
 void Display_ip(void);
 void Display_time(void);
 
-void Key_Function(KEY_VALUE key_value)
+void Key_Function(int key_value)
 {
     char temp_str[20];
     
-    sprintf(temp_str,"Key_Value: %d", key_value);
+    sprintf(temp_str,"KEY: 0x%02X", key_value);
     LCD_write_english_string(0,5,temp_str);
-    if(key_value == K2_DOWN_SHORT)  Display_tp();
+    
     if(key_value == K3_DOWN_SHORT)  Display_ip();
+    if(key_value == K4_DOWN_SHORT)  Display_tp();
+    if(key_value == (K1_DOWN_LONG+K2_DOWN_LONG))   system("sudo poweroff");
+    if(key_value == (K3_DOWN_LONG+K4_DOWN_LONG))   system("sudo reboot");
     if(key_value == K4_DOWN_LONG)   LCD_BL_ON;
     else LCD_BL_OFF;
 }

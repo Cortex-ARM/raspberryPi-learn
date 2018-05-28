@@ -4,7 +4,6 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-ALL_UP	code/inc/key.h	/^    ALL_UP,$/;"	e	enum:__anon1
 CC	Makefile	/^CC = gcc$/;"	m
 CFLAGS	Makefile	/^CFLAGS = -g -Wall -I$(DIR_INC) -lwiringPi$/;"	m
 DIR_BIN	Makefile	/^DIR_BIN = .\/bin$/;"	m
@@ -14,22 +13,21 @@ DIR_SRC	Makefile	/^DIR_SRC = .\/code\/src$/;"	m
 Display_ip	code/src/main.c	/^void Display_ip()$/;"	f
 Display_time	code/src/main.c	/^void Display_time()$/;"	f
 Display_tp	code/src/main.c	/^void Display_tp()$/;"	f
-K1_DOWN_LONG	code/inc/key.h	/^    K1_DOWN_LONG,$/;"	e	enum:__anon1
-K1_DOWN_SHORT	code/inc/key.h	/^    K1_DOWN_SHORT,$/;"	e	enum:__anon1
-K2_DOWN_LONG	code/inc/key.h	/^    K2_DOWN_LONG,$/;"	e	enum:__anon1
-K2_DOWN_SHORT	code/inc/key.h	/^    K2_DOWN_SHORT,$/;"	e	enum:__anon1
-K3_DOWN_LONG	code/inc/key.h	/^    K3_DOWN_LONG,$/;"	e	enum:__anon1
-K3_DOWN_SHORT	code/inc/key.h	/^    K3_DOWN_SHORT,$/;"	e	enum:__anon1
-K4_DOWN_LONG	code/inc/key.h	/^    K4_DOWN_LONG$/;"	e	enum:__anon1
-K4_DOWN_SHORT	code/inc/key.h	/^    K4_DOWN_SHORT,$/;"	e	enum:__anon1
+K1_DOWN_LONG	code/inc/key.h	10;"	d
+K1_DOWN_SHORT	code/inc/key.h	9;"	d
+K2_DOWN_LONG	code/inc/key.h	12;"	d
+K2_DOWN_SHORT	code/inc/key.h	11;"	d
+K3_DOWN_LONG	code/inc/key.h	14;"	d
+K3_DOWN_SHORT	code/inc/key.h	13;"	d
+K4_DOWN_LONG	code/inc/key.h	16;"	d
+K4_DOWN_SHORT	code/inc/key.h	15;"	d
 KEY	code/src/key.c	/^KEY_STA KEY[4];$/;"	v
 KEY_H_	code/inc/key.h	2;"	d
-KEY_STA	code/inc/key.h	/^}KEY_STA;$/;"	t	typeref:struct:__anon2
-KEY_VALUE	code/inc/key.h	/^}KEY_VALUE;$/;"	t	typeref:enum:__anon1
+KEY_STA	code/inc/key.h	/^}KEY_STA;$/;"	t	typeref:struct:__anon1
 KeyInit	code/src/key.c	/^void KeyInit()$/;"	f
 KeyScan	code/src/key.c	/^static void KeyScan(KEY_STA *Sn, int value)$/;"	f	file:
-Key_Function	code/src/main.c	/^void Key_Function(KEY_VALUE key_value)$/;"	f
-KeyboardScan	code/src/key.c	/^KEY_VALUE KeyboardScan()$/;"	f
+Key_Function	code/src/main.c	/^void Key_Function(int key_value)$/;"	f
+KeyboardScan	code/src/key.c	/^int KeyboardScan()$/;"	f
 LCD5110_H_	code/inc/lcd5110.h	2;"	d
 LCD_BL_OFF	code/inc/lcd5110.h	21;"	d
 LCD_BL_OFF	code/inc/lcd5110.h	40;"	d
@@ -81,10 +79,10 @@ font6x8	code/src/lcd5110.c	/^static const  unsigned char font6x8[][6] =$/;"	v	fi
 get_ip	code/src/main.c	/^int get_ip(char *ip_name, char *ip_buff)$/;"	f
 get_tp	code/src/main.c	/^int get_tp()$/;"	f
 int_clk	code/src/lcd5110.c	/^void int_clk(void)$/;"	f
-lead_count	code/inc/key.h	/^    unsigned char lead_count;$/;"	m	struct:__anon2
-long_press	code/inc/key.h	/^    unsigned char long_press;$/;"	m	struct:__anon2
+lead_count	code/inc/key.h	/^    unsigned char lead_count;$/;"	m	struct:__anon1
+long_press	code/inc/key.h	/^    unsigned char long_press;$/;"	m	struct:__anon1
 main	code/src/main.c	/^int main(void) $/;"	f
-press_count	code/inc/key.h	/^    unsigned char press_count;$/;"	m	struct:__anon2
-short_press	code/inc/key.h	/^    unsigned char short_press;$/;"	m	struct:__anon2
-tri	code/inc/key.h	/^    unsigned char tri;$/;"	m	struct:__anon2
+press_count	code/inc/key.h	/^    unsigned char press_count;$/;"	m	struct:__anon1
+short_press	code/inc/key.h	/^    unsigned char short_press;$/;"	m	struct:__anon1
+tri	code/inc/key.h	/^    unsigned char tri;$/;"	m	struct:__anon1
 write_chinese	code/src/lcd5110.c	/^static unsigned char write_chinese[][32]={$/;"	v	file:

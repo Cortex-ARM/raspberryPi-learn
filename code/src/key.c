@@ -54,23 +54,22 @@ static void KeyScan(KEY_STA *Sn, int value)
     }
 }
 
-KEY_VALUE KeyboardScan()
+int KeyboardScan()
 {
-    KEY_VALUE key_value;
+    int key_value = 0;
 
     KeyScan(&KEY[0], digitalRead(S1));
     KeyScan(&KEY[1], digitalRead(S2));
     KeyScan(&KEY[2], digitalRead(S3));
     KeyScan(&KEY[3], digitalRead(S4));
-    if(KEY[0].short_press) key_value = K1_DOWN_SHORT;
-    else if(KEY[0].long_press) key_value = K1_DOWN_LONG;
-    else if(KEY[1].short_press) key_value = K2_DOWN_SHORT;
-    else if(KEY[1].long_press) key_value = K2_DOWN_LONG;
-    else if(KEY[2].short_press) key_value = K3_DOWN_SHORT;
-    else if(KEY[2].long_press) key_value = K3_DOWN_LONG;
-    else if(KEY[3].short_press) key_value = K4_DOWN_SHORT;
-    else if(KEY[3].long_press) key_value = K4_DOWN_LONG;
-    else key_value = ALL_UP;
+    if(KEY[0].short_press) key_value |= K1_DOWN_SHORT;
+    if(KEY[0].long_press)  key_value |= K1_DOWN_LONG;
+    if(KEY[1].short_press) key_value |= K2_DOWN_SHORT;
+    if(KEY[1].long_press)  key_value |= K2_DOWN_LONG;
+    if(KEY[2].short_press) key_value |= K3_DOWN_SHORT;
+    if(KEY[2].long_press)  key_value |= K3_DOWN_LONG;
+    if(KEY[3].short_press) key_value |= K4_DOWN_SHORT;
+    if(KEY[3].long_press)  key_value |= K4_DOWN_LONG;
     
     return key_value;
 }

@@ -6,18 +6,14 @@
 #define S3 25
 #define S4 28 
 
-typedef enum 
-{
-    ALL_UP,
-    K1_DOWN_SHORT,
-    K1_DOWN_LONG,
-    K2_DOWN_SHORT,
-    K2_DOWN_LONG,
-    K3_DOWN_SHORT,
-    K3_DOWN_LONG,
-    K4_DOWN_SHORT,
-    K4_DOWN_LONG
-}KEY_VALUE;
+#define  K1_DOWN_SHORT ((int)0x01)
+#define  K1_DOWN_LONG  ((int)0x10)
+#define  K2_DOWN_SHORT ((int)0x02)
+#define  K2_DOWN_LONG  ((int)0x20)
+#define  K3_DOWN_SHORT ((int)0x04)
+#define  K3_DOWN_LONG  ((int)0x40)
+#define  K4_DOWN_SHORT ((int)0x08)
+#define  K4_DOWN_LONG  ((int)0x80)
 
 typedef struct 
 {
@@ -29,6 +25,6 @@ typedef struct
 }KEY_STA;
 
 extern void KeyInit(void);
-extern KEY_VALUE KeyboardScan(void);
+extern int KeyboardScan(void);
 
 #endif 
